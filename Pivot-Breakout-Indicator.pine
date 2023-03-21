@@ -1,0 +1,35 @@
+//@version=5
+indicator(title="Pivot Breakout Indicator", overlay=true)
+
+// Demark Pivot
+Demark(open, high, low, close) =>
+    x = 0.0
+    if close < open
+        x := high + (2*low) + close
+    else if close > open
+        x := (2*high) + low + close
+    else
+        x := high + low + (2*close)
+    support = (x/2) - high
+    resistance = (x/2) - low
+    [support, resistance]
+
+[do, dh, dl, dc] = request.security(syminfo.tickerid, "D", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[daily_support, daily_resistance] = Demark(do, dh, dl, dc)
+plot(daily_resistance, title="Daily Resistance", color=color.fuchsia, linewidth=3)
+plot(daily_support, title="Daily Support", color=color.aqua, linewidth=3)
+
+[wo, wh, wl, wc] = request.security(syminfo.tickerid, "W", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[weekly_support, weekly_resistance] = Demark(wo, wh, wl, wc)
+plot(weekly_resistance, title="Weekly Resistance", color=color.red, linewidth=4)
+plot(weekly_support, title="Weekly Support", color=color.green, linewidth=4)
+
+// Bollinger Bands
+basis = ta.sma(close, 20)
+dev = 2 * ta.stdev(close, 20)
+upper = basis + dev
+lower = basis - dev
+plot(basis, "Moving Average", color=color.black, linewidth=2)
+p1 = plot(upper, "BB Upper", color=color.blue, linewidth=2)
+p2 = plot(lower, "BB Lower", color=color.blue, linewidth=2)
+fill(p1, p2, title = "BB Background", color=color.new(color.black, 90))
