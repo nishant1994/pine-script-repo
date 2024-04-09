@@ -11,7 +11,7 @@ RequestSecurity(_tf, _exp, _barmerge) =>
     request.security(syminfo.tickerid, _tf, _exp[barstate.isrealtime ? 1 : 0], _barmerge)[barstate.isrealtime ? 0 : 1]
 
 // Get MA expression
-MA_Value = ta.sma(close, i_MA)
+MA_Value = 2 * ta.sma(close, i_MA)
 dev = ta.stdev(close, i_MA)
 
 // Get MAs on lower timeframes
