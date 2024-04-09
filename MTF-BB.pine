@@ -2,9 +2,9 @@
 indicator("MTF-BB", overlay=true)
 
 // Get user inputs
-i_MA   = input.int(200, "MA Period Length")
-i_LTF   = input.timeframe("D",   "Lower Time Frame")
-i_HTF   = input.timeframe("W",  "Higher Time Frame")
+i_MA   = input.int(50, "MA Period Length")
+i_LTF   = input.timeframe("W",   "Lower Time Frame")
+i_HTF   = input.timeframe("M",  "Higher Time Frame")
 
 // Non-repainting security function
 RequestSecurity(_tf, _exp, _barmerge) =>
