@@ -1,36 +1,37 @@
 // @version=5
 indicator("MTF-BB", overlay=true)
 
-// Get user inputs
-i_EMA   = input.int(44, "EMA Period Length")
+// User Inputs
+i_EMA   = input.int(44, "MA Period Length")
 i_LTF   = input.timeframe("D",   "Lower Time Frame")
 i_HTF   = input.timeframe("W",  "Higher Time Frame")
 
-// Non-repainting security function
+// Non-Repainting Security Function
 RequestSecurity(_tf, _exp, _barmerge) =>
     request.security(syminfo.tickerid, _tf, _exp[barstate.isrealtime ? 1 : 0], _barmerge)[barstate.isrealtime ? 0 : 1]
 
-// Get MA expression
+// Calculate MA
 EMA_Value = ta.ema(close, i_EMA)
 dev = 2 * ta.stdev(close, i_EMA)
 
-// Get MAs on lower timeframes
+// MA Lower TimeFrame
 EMA_LTF = RequestSecurity(i_LTF, EMA_Value, barmerge.gaps_on)
 dev_LTF = RequestSecurity(i_LTF, dev, barmerge.gaps_on)
 UB_LTF = EMA_LTF + dev_LTF
 LB_LTF = EMA_LTF - dev_LTF
 
-// Get MAs on higher timeframes
+// MA Higher TimeFrame
 EMA_HTF = RequestSecurity(i_HTF, EMA_Value, barmerge.gaps_on)
 dev_HTF = RequestSecurity(i_HTF, dev, barmerge.gaps_on)
 UB_HTF = EMA_HTF + dev_HTF
 LB_HTF = EMA_HTF - dev_HTF
 
-// Draw MAs
+// Plot MA LTF
 plot(UB_LTF, "UB-LTF", color.rgb(0, 0, 255, 0), linewidth=2)
-plot(EMA_LTF, "EMA-LTF", color.rgb(0, 0, 0, 0), linewidth=2)
+plot(EMA_LTF, "MA-LTF", color.rgb(0, 0, 0, 0), linewidth=2)
 plot(LB_LTF, "LB-LTF", color.rgb(0, 0, 255, 0), linewidth=2)
 
+// Plot MA HTF
 plot(UB_HTF, "UB-HTF", color.rgb(0, 0, 255, 0), linewidth=4)
-plot(EMA_HTF, "EMA-HTF", color.rgb(0, 0, 0, 0), linewidth=4)
+plot(EMA_HTF, "MA-HTF", color.rgb(0, 0, 0, 0), linewidth=4)
 plot(LB_HTF, "LB-HTF", color.rgb(0, 0, 255, 0), linewidth=4)
