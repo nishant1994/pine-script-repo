@@ -29,7 +29,11 @@ basis = ta.sma(close, 20)
 dev = 2 * ta.stdev(close, 20)
 upper = basis + dev
 lower = basis - dev
-plot(basis, "Moving Average", color=color.black, linewidth=2)
-p1 = plot(upper, "BB Upper", color=color.blue, linewidth=2)
-p2 = plot(lower, "BB Lower", color=color.blue, linewidth=2)
+plot(basis, "BB Moving Average", color=color.black, linewidth=2)
+p1 = plot(upper, "BB Upper Band", color=color.blue, linewidth=2)
+p2 = plot(lower, "BB Lower Band", color=color.blue, linewidth=2)
 fill(p1, p2, title = "BB Background", color=color.new(color.black, 90))
+
+// Major Trend Indicator
+trend = ta.ema(close, 44)
+plot(trend, "Trend Moving Average", color=color.black, linewidth=4)
