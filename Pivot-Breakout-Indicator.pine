@@ -1,7 +1,7 @@
 //@version=5
 indicator(title="Pivot Breakout Indicator", overlay=true)
 
-// Demark Pivot
+// Demark Pivots
 Demark(open, high, low, close) =>
     x = 0.0
     if close < open
@@ -14,26 +14,32 @@ Demark(open, high, low, close) =>
     resistance = (x/2) - low
     [support, resistance]
 
+// Daily Pivots
 [do, dh, dl, dc] = request.security(syminfo.tickerid, "D", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
 [daily_support, daily_resistance] = Demark(do, dh, dl, dc)
 plot(daily_resistance, title="Daily Resistance", color=color.fuchsia, linewidth=3)
 plot(daily_support, title="Daily Support", color=color.aqua, linewidth=3)
 
+// Weekly Pivots
 [wo, wh, wl, wc] = request.security(syminfo.tickerid, "W", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
 [weekly_support, weekly_resistance] = Demark(wo, wh, wl, wc)
 plot(weekly_resistance, title="Weekly Resistance", color=color.red, linewidth=4)
 plot(weekly_support, title="Weekly Support", color=color.green, linewidth=4)
 
-// Bollinger Bands
-basis = ta.sma(close, 20)
-dev = 2 * ta.stdev(close, 20)
-upper = basis + dev
-lower = basis - dev
-plot(basis, "BB Moving Average", color=color.black, linewidth=2)
-p1 = plot(upper, "BB Upper Band", color=color.blue, linewidth=2)
-p2 = plot(lower, "BB Lower Band", color=color.blue, linewidth=2)
-fill(p1, p2, title = "BB Background", color=color.new(color.black, 90))
+// Minor Trend
+sma20 = ta.sma(close, 20)
+dev20 = 2 * ta.stdev(close, 20)
+upper20 = sma20 + dev20
+lower20 = sma20 - dev20
+plot(upper20, "Minor Trend UB", color=color.blue, linewidth=2)
+plot(sma20, "Minor Trend MA", color=color.black, linewidth=2)
+plot(lower20, "Minor Trend LB", color=color.blue, linewidth=2)
 
-// Major Trend Indicator
-trend = ta.ema(close, 44)
-plot(trend, "Trend Moving Average", color=color.black, linewidth=4)
+// Major Trend
+ema44 = ta.ema(close, 44)
+dev44 = 2 * ta.stdev(close, 44)
+upper44 = ema44 + dev44
+lower44 = ema44 - dev44
+plot(upper44, "Major Trend UB", color=color.blue, linewidth=4)
+plot(ema44, "Major Trend MA", color=color.black, linewidth=4)
+plot(lower44, "Major Trend LB", color=color.blue, linewidth=4)
