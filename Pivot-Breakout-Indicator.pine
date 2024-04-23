@@ -27,13 +27,13 @@ plot(weekly_resistance, title="Weekly Resistance", color=color.red, linewidth=4)
 plot(weekly_support, title="Weekly Support", color=color.green, linewidth=4)
 
 // Minor Trend
-sma20 = ta.sma(close, 20)
-dev20 = 2 * ta.stdev(close, 20)
-upper20 = sma20 + dev20
-lower20 = sma20 - dev20
-plot(upper20, "Minor Trend UB", color=color.blue, linewidth=2)
-plot(sma20, "Minor Trend MA", color=color.black, linewidth=2)
-plot(lower20, "Minor Trend LB", color=color.blue, linewidth=2)
+sma21 = ta.sma(close, 21)
+dev21 = 2 * ta.stdev(close, 21)
+upper21 = sma21 + dev21
+lower21 = sma21 - dev21
+plot(upper21, "Minor Trend UB", color=color.blue, linewidth=2)
+plot(sma21, "Minor Trend MA", color=color.black, linewidth=2)
+plot(lower21, "Minor Trend LB", color=color.blue, linewidth=2)
 
 // Major Trend
 ema44 = ta.ema(close, 44)
