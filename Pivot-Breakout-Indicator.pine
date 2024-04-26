@@ -36,10 +36,10 @@ plot(sma21, "Minor Trend MA", color=color.black, linewidth=2)
 plot(lower21, "Minor Trend LB", color=color.blue, linewidth=2)
 
 // Major Trend
-ema44 = ta.ema(close, 44)
+sma44 = ta.sma(close, 44)
 dev44 = 2 * ta.stdev(close, 44)
-upper44 = ema44 + dev44
-lower44 = ema44 - dev44
+upper44 = sma44 + dev44
+lower44 = sma44 - dev44
 plot(upper44, "Major Trend UB", color=color.blue, linewidth=4)
-plot(ema44, "Major Trend MA", color=color.black, linewidth=4)
+plot(sma44, "Major Trend MA", color=color.black, linewidth=4)
 plot(lower44, "Major Trend LB", color=color.blue, linewidth=4)
