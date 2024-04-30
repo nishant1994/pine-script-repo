@@ -2,17 +2,16 @@
 indicator("MTF-BB", overlay=true)
 
 // User Inputs
-i_MA   = input.int(44, "MA Period Length")
-i_LTF   = input.timeframe("D",   "Lower Time Frame")
-i_HTF   = input.timeframe("W",  "Higher Time Frame")
+i_LTF   = input.timeframe("D", "Lower Time Frame")
+i_HTF   = input.timeframe("W", "Higher Time Frame")
 
 // Non-Repainting Security Function
 RequestSecurity(_tf, _exp, _barmerge) =>
     request.security(syminfo.tickerid, _tf, _exp[barstate.isrealtime ? 1 : 0], _barmerge)[barstate.isrealtime ? 0 : 1]
 
 // Calculate MA
-MA_Value = ta.sma(close, i_MA)
-dev = 2 * ta.stdev(close, i_MA)
+MA_Value = ta.sma(close, 44)
+dev = 2 * ta.stdev(close, 44)
 
 // MA Lower TimeFrame
 MA_LTF = RequestSecurity(i_LTF, MA_Value, barmerge.gaps_on)
