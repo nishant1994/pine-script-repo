@@ -21,8 +21,8 @@ plot(yearly_resistance, title="Yearly Resistance", color=color.red, linewidth=4)
 plot(yearly_support, title="Yearly Support", color=color.green, linewidth=4)
 
 // User Inputs
-i_LTF   = input.timeframe("D", "Lower Time Frame")
-i_HTF   = input.timeframe("W", "Higher Time Frame")
+i_LTF   = input.timeframe("W", "Lower Time Frame")
+i_HTF   = input.timeframe("M", "Higher Time Frame")
 
 // Non-Repainting Security Function
 RequestSecurity(_tf, _exp, _barmerge) =>
