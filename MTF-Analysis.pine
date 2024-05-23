@@ -29,14 +29,14 @@ MA_Value = ta.sma(close, 44)
 dev = 2 * ta.stdev(close, 44)
 
 // MA Lower TimeFrame
-MA_LTF = RequestSecurity("W", MA_Value, barmerge.gaps_on)
-dev_LTF = RequestSecurity("W", dev, barmerge.gaps_on)
+MA_LTF = RequestSecurity("D", MA_Value, barmerge.gaps_on)
+dev_LTF = RequestSecurity("D", dev, barmerge.gaps_on)
 UB_LTF = MA_LTF + dev_LTF
 LB_LTF = MA_LTF - dev_LTF
 
 // MA Higher TimeFrame
-MA_HTF = RequestSecurity("M", MA_Value, barmerge.gaps_on)
-dev_HTF = RequestSecurity("M", dev, barmerge.gaps_on)
+MA_HTF = RequestSecurity("W", MA_Value, barmerge.gaps_on)
+dev_HTF = RequestSecurity("W", dev, barmerge.gaps_on)
 UB_HTF = MA_HTF + dev_HTF
 LB_HTF = MA_HTF - dev_HTF
 
