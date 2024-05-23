@@ -20,10 +20,6 @@ Demark(open, high, low, close) =>
 plot(yearly_resistance, title="Yearly Resistance", color=color.red, linewidth=4)
 plot(yearly_support, title="Yearly Support", color=color.green, linewidth=4)
 
-// User Inputs
-i_LTF   = input.timeframe("W", "Lower Time Frame")
-i_HTF   = input.timeframe("M", "Higher Time Frame")
-
 // Non-Repainting Security Function
 RequestSecurity(_tf, _exp, _barmerge) =>
     request.security(syminfo.tickerid, _tf, _exp[barstate.isrealtime ? 1 : 0], _barmerge)[barstate.isrealtime ? 0 : 1]
@@ -33,14 +29,14 @@ MA_Value = ta.sma(close, 44)
 dev = 2 * ta.stdev(close, 44)
 
 // MA Lower TimeFrame
-MA_LTF = RequestSecurity(i_LTF, MA_Value, barmerge.gaps_on)
-dev_LTF = RequestSecurity(i_LTF, dev, barmerge.gaps_on)
+MA_LTF = RequestSecurity("W", MA_Value, barmerge.gaps_on)
+dev_LTF = RequestSecurity("W", dev, barmerge.gaps_on)
 UB_LTF = MA_LTF + dev_LTF
 LB_LTF = MA_LTF - dev_LTF
 
 // MA Higher TimeFrame
-MA_HTF = RequestSecurity(i_HTF, MA_Value, barmerge.gaps_on)
-dev_HTF = RequestSecurity(i_HTF, dev, barmerge.gaps_on)
+MA_HTF = RequestSecurity("M", MA_Value, barmerge.gaps_on)
+dev_HTF = RequestSecurity("M", dev, barmerge.gaps_on)
 UB_HTF = MA_HTF + dev_HTF
 LB_HTF = MA_HTF - dev_HTF
 
