@@ -1,5 +1,5 @@
 //@version=5
-indicator(title="Pivot Breakout Indicator", overlay=true)
+indicator(title="Trading_Indicator", overlay=true)
 
 // Demark Pivots
 Demark(open, high, low, close) =>
