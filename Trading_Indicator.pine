@@ -1,7 +1,7 @@
 //@version=5
 indicator(title="Trading_Indicator", overlay=true)
 
-// Demark Pivots
+// Demark Pivots Function
 Demark(open, high, low, close) =>
     x = 0.0
     if close < open
