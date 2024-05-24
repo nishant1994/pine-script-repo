@@ -1,2 +1,2 @@
 # pine-script-repo
-Pine Script Repository for Trading Indicators and Strategies
+Pine Script Repository for Investing and Trading Indicators and Strategies
