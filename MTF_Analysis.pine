@@ -14,6 +14,12 @@ Demark(open, high, low, close) =>
     resistance = (x/2) - low
     [support, resistance]
 
+// Monthly Pivots
+[mo, mh, ml, mc] = request.security(syminfo.tickerid, "M", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[monthly_support, monthly_resistance] = Demark(mo, mh, ml, mc)
+plot(monthly_resistance, title="Monthly Resistance", color=color.fuchsia, linewidth=3)
+plot(monthly_support, title="Monthly Support", color=color.aqua, linewidth=3)
+
 // Yearly Pivots
 [yo, yh, yl, yc] = request.security(syminfo.tickerid, "12M", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
 [yearly_support, yearly_resistance] = Demark(yo, yh, yl, yc)
