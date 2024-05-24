@@ -17,29 +17,37 @@ Demark(open, high, low, close) =>
 // Daily Pivots
 [do, dh, dl, dc] = request.security(syminfo.tickerid, "D", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
 [daily_support, daily_resistance] = Demark(do, dh, dl, dc)
+
+// Plot Daily Pivots
 plot(daily_resistance, title="Daily Resistance", color=color.fuchsia, linewidth=3)
 plot(daily_support, title="Daily Support", color=color.aqua, linewidth=3)
 
 // Weekly Pivots
 [wo, wh, wl, wc] = request.security(syminfo.tickerid, "W", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
 [weekly_support, weekly_resistance] = Demark(wo, wh, wl, wc)
+
+// Plot Weekly Pivots
 plot(weekly_resistance, title="Weekly Resistance", color=color.red, linewidth=4)
 plot(weekly_support, title="Weekly Support", color=color.green, linewidth=4)
 
 // Minor Trend
-sma22 = ta.sma(close, 22)
-dev22 = 2 * ta.stdev(close, 22)
-upper22 = sma22 + dev22
-lower22 = sma22 - dev22
-plot(upper22, "Minor Trend UB", color=color.blue, linewidth=2)
-plot(sma22, "Minor Trend MA", color=color.black, linewidth=2)
-plot(lower22, "Minor Trend LB", color=color.blue, linewidth=2)
+minor_sma = ta.sma(close, 22)
+minor_dev = 2 * ta.stdev(close, 22)
+minor_upper = minor_sma + minor_dev
+minor_lower = minor_sma - minor_dev
+
+// Plot Minor Trend
+plot(minor_upper, "Minor Trend UB", color=color.blue, linewidth=2)
+plot(minor_sma, "Minor Trend MA", color=color.black, linewidth=2)
+plot(minor_lower, "Minor Trend LB", color=color.blue, linewidth=2)
 
 // Major Trend
-sma44 = ta.sma(close, 44)
-dev44 = 2 * ta.stdev(close, 44)
-upper44 = sma44 + dev44
-lower44 = sma44 - dev44
-plot(upper44, "Major Trend UB", color=color.blue, linewidth=4)
-plot(sma44, "Major Trend MA", color=color.black, linewidth=4)
-plot(lower44, "Major Trend LB", color=color.blue, linewidth=4)
+major_sma = ta.sma(close, 44)
+major_dev = 2 * ta.stdev(close, 44)
+major_upper = major_sma + major_dev
+major_lower = major_sma - major_dev
+
+// Plot Major Trend
+plot(major_upper, "Major Trend UB", color=color.blue, linewidth=4)
+plot(major_sma, "Major Trend MA", color=color.black, linewidth=4)
+plot(major_lower, "Major Trend LB", color=color.blue, linewidth=4)
