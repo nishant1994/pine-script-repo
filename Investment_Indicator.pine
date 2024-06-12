@@ -1,0 +1,35 @@
+// @version=5
+indicator("Investment_Indicator", overlay=true)
+
+// Demark Pivots Function
+Demark(open, high, low, close) =>
+    x = 0.0
+    if close < open
+        x := high + (2*low) + close
+    else if close > open
+        x := (2*high) + low + close
+    else
+        x := high + low + (2*close)
+    support = (x/2) - high
+    resistance = (x/2) - low
+    [support, resistance]
+
+// Yearly Pivots
+[yo, yh, yl, yc] = request.security(syminfo.tickerid, "12M", [open[1], high[1], low[1], close[1]], lookahead=barmerge.lookahead_on)
+[yearly_support, yearly_resistance] = Demark(yo, yh, yl, yc)
+
+// Plot Yearly Pivots
+plot(yearly_resistance, title="Yearly Resistance", color=color.red, linewidth=4)
+plot(yearly_support, title="Yearly Support", color=color.green, linewidth=4)
+
+    
+// Bollinger Bands
+sma = ta.sma(close, 44)
+dev = 2 * ta.stdev(close, 44)
+UB = sma + dev
+LB = sma - dev
+
+// Plot Weekly Bands
+plot(UB, "Upper Band", color.blue, linewidth=4)
+plot(sma, "Base Band", color.black, linewidth=4)
+plot(LB, "Lower Band", color.blue, linewidth=4)
