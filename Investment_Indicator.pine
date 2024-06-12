@@ -29,7 +29,7 @@ dev = 2 * ta.stdev(close, 44)
 UB = sma + dev
 LB = sma - dev
 
-// Plot Weekly Bands
+// Plot Bollinger Bands
 plot(UB, "Upper Band", color.blue, linewidth=4)
 plot(sma, "Base Band", color.black, linewidth=4)
 plot(LB, "Lower Band", color.blue, linewidth=4)
