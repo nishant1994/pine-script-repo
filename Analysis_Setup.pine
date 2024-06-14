@@ -1,5 +1,5 @@
 // @version=5
-indicator("Investment_Indicator", overlay=true)
+indicator("Analysis_Setup", overlay=true)
 
 // Demark Pivots Function
 Demark(open, high, low, close) =>
@@ -34,10 +34,10 @@ plot(yearly_support, title="Yearly Support", color=color.green, linewidth=4)
 RequestSecurity(tf, val) =>
     request.security(syminfo.tickerid, tf, val, lookahead=barmerge.lookahead_on)
     
-// Calculate Moving Average
+// Moving Average
 MA_Value = ta.sma(close, 44)
 
-// Calculate Standard Deviation
+// Standard Deviation
 dev = 2 * ta.stdev(close, 44)
 
 // Daily Bands
