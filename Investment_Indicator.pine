@@ -1,5 +1,5 @@
 // @version=5
-indicator("MTF_Analysis", overlay=true)
+indicator("Investment_Indicator", overlay=true)
 
 // Demark Pivots Function
 Demark(open, high, low, close) =>
@@ -37,7 +37,7 @@ RequestSecurity(tf, val) =>
 // Calculate Moving Average
 MA_Value = ta.sma(close, 44)
 
-// Calculate Standard Deviatin
+// Calculate Standard Deviation
 dev = 2 * ta.stdev(close, 44)
 
 // Daily Bands
