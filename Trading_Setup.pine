@@ -1,5 +1,5 @@
 //@version=5
-indicator(title="Trading_Indicator", overlay=true)
+indicator(title="Trading_Setup", overlay=true)
 
 // Demark Pivots Function
 Demark(open, high, low, close) =>
